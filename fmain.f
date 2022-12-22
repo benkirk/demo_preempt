@@ -8,7 +8,7 @@
       i = 1
       do while (.true.)
          print *, i, ": Inside main function"
-         call sleep(1)          ! 1 sec.
+         call sleep(5)
          i = i+1
       end do
       end program main

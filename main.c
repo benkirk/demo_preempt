@@ -12,7 +12,7 @@ int main ()
   for (int i=1;;i++)
     {
       printf("%d : Inside main function\n",i);
-      sleep(1);
+      sleep(5);
     }
   return 0;
 }

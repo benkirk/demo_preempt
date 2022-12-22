@@ -27,18 +27,16 @@ void my_sig_handler (int signum)
   time_t now;
   time(&now);
 
-    // Convert to local time format and print to stdout
-    printf("Today is %s", ctime(&now));
   printf("\nInside handler function\n");
 
   switch (signum)
     {
     case SIGINT:
-      printf("...caught SIGINT at %s...\n", ctime(&now));
+      printf("...caught SIGINT at %s", ctime(&now));
       break;
 
     case SIGTERM:
-      printf("...caught SIGTERM at %s...\n", ctime(&now));
+      printf("...caught SIGTERM at %s", ctime(&now));
       break;
 
     case SIGUSR1:
@@ -46,7 +44,7 @@ void my_sig_handler (int signum)
       return;
 
     default:
-      printf("...caught other unknown signal: %d at %s...\n", signum, ctime(&now));
+      printf("...caught other unknown signal: %d at %s", signum, ctime(&now));
       printf("   see \"man 7 signal\" for a list of known signals\n");
 
       break;
