@@ -1,3 +1,5 @@
 *~
 *.o
 ?demo
+TAGS
+hello_preempt.o*

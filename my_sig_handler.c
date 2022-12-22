@@ -6,11 +6,45 @@
 
 
 
+int checkpoint_req = 0;
+
+
+
+int checkpoint_requested()
+{
+  return checkpoint_req;
+}
+
+
+
+void done_checkpoint ()
+{
+  checkpoint_req = 0;
+}
+
+
+
 void register_sig_handler ()
 {
+  printf("Registering user-specified signal handlers for PID %d\n", getpid());
+
   signal(SIGINT,  my_sig_handler);
   signal(SIGTERM, my_sig_handler);
   signal(SIGUSR1, my_sig_handler);
+}
+
+
+
+int checkpoint_requested_()
+{
+  return checkpoint_requested();
+}
+
+
+
+void done_checkpoint_()
+{
+  done_checkpoint();
 }
 
 
@@ -33,10 +67,12 @@ void my_sig_handler (int signum)
     {
     case SIGINT:
       printf("...caught SIGINT at %s", ctime(&now));
+      checkpoint_req = 1;
       break;
 
     case SIGTERM:
       printf("...caught SIGTERM at %s", ctime(&now));
+      checkpoint_req = 1;
       break;
 
     case SIGUSR1:
@@ -46,7 +82,6 @@ void my_sig_handler (int signum)
     default:
       printf("...caught other unknown signal: %d at %s", signum, ctime(&now));
       printf("   see \"man 7 signal\" for a list of known signals\n");
-
       break;
     }
 

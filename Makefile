@@ -8,3 +8,10 @@ fdemo: fmain.o my_sig_handler.o
 
 clean:
 	rm -f cdemo fdemo *.o *~
+
+clobber:
+	$(MAKE) clean
+	rm -f hello_preempt.o* TAGS
+
+run: preempt_gust.sh
+	qsub preempt_gust.sh
