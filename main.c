@@ -9,7 +9,7 @@ void do_checkpoint ()
 {
   for (int i=1; i<=10; i++)
     {
-      printf("\t%d : Inside checkpoint function\n",i);
+      printf("\t%2d : Inside checkpoint function\n",i);
       fflush(stdout);
       sleep(5);
     }
@@ -25,7 +25,7 @@ int main ()
 
   for (int i=1; i<=50 ;i++)
     {
-      printf("%d : Inside main function\n",i);
+      printf("%2d : Inside main function\n",i);
       fflush(stdout);
       sleep(5);
 
