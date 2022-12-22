@@ -1,28 +1,52 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
+#include <time.h>
 #include "my_sig_handler.h"
 
-void my_sig_handler(int signum){
-  printf("\nInside handler function\n");
 
+
+void register_sig_handler ()
+{
+  signal(SIGINT,  my_sig_handler);
+  signal(SIGTERM, my_sig_handler);
+  signal(SIGUSR1, my_sig_handler);
+}
+
+
+
+void register_sig_handler_ ()
+{
+  register_sig_handler ();
+}
+
+
+
+void my_sig_handler (int signum)
+{
+  time_t now;
+  time(&now);
+
+    // Convert to local time format and print to stdout
+    printf("Today is %s", ctime(&now));
+  printf("\nInside handler function\n");
 
   switch (signum)
     {
     case SIGINT:
-      printf("...caught SIGINT...\n");
+      printf("...caught SIGINT at %s...\n", ctime(&now));
       break;
 
     case SIGTERM:
-      printf("...caught SIGTERM...\n");
+      printf("...caught SIGTERM at %s...\n", ctime(&now));
       break;
 
     case SIGUSR1:
-      printf("...caught SIGUSR1, ignoring...\n");
+      printf("...caught SIGUSR1 at %s, ignoring...\n",ctime(&now));
       return;
 
     default:
-      printf("...caught other unknown signal: %d ...\n", signum);
+      printf("...caught other unknown signal: %d at %s...\n", signum, ctime(&now));
       printf("   see \"man 7 signal\" for a list of known signals\n");
 
       break;

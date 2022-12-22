@@ -5,15 +5,14 @@
 
 
 
-int main() {
+int main ()
+{
+  register_sig_handler();
 
-  signal(SIGINT,  my_sig_handler); // Register signal handler
-  signal(SIGTERM, my_sig_handler); // Register signal handler
-  signal(SIGUSR1, my_sig_handler); // Register signal handler
-
-  for (int i=1;;i++){    //Infinite loop
-    printf("%d : Inside main function\n",i);
-    sleep(1);  // Delay for 1 second
-  }
+  for (int i=1;;i++)
+    {
+      printf("%d : Inside main function\n",i);
+      sleep(1);
+    }
   return 0;
 }
