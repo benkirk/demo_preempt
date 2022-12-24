@@ -19,8 +19,11 @@ while true; do
     echo && echo && echo "Running the Fortran code..."
     ./fdemo
 
+    echo && echo && echo "Running the Bash script..."
+    ./demo.sh
+
     echo && echo && echo "Running the Python code..."
-    ./pydemo.py
+    ./demo.py
 done
 
 echo && echo && echo "Done at $(date)"

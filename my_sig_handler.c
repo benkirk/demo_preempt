@@ -91,3 +91,23 @@ void my_sig_handler (int signum)
 
   return;
 }
+
+
+
+#ifdef HAVE_MPI
+int mpi_checkpoint_requested (MPI_Comm comm)
+{
+  int local_checkpoint_req = checkpoint_req;
+  MPI_Allreduce(&local_checkpoint_req,
+                &checkpoint_req,
+                1, MPI_INT, MPI_MAX, comm);
+  return checkpoint_req;
+}
+
+
+
+int mpi_checkpoint_requested_(MPI_Comm comm)
+{
+  return mpi_checkpoint_requested(comm);
+}
+#endif /* #ifdef HAVE_MPI */
