@@ -60,6 +60,8 @@ int main (int argc, char **argv)
         }
       MPI_Barrier(MPI_COMM_WORLD);
 
+      // this function needs to perform a reduction to see if any rank received
+      // a signal, hence it is blocking.
       if (mpi_checkpoint_requested(MPI_COMM_WORLD))
         do_checkpoint(MPI_COMM_WORLD);
     }
