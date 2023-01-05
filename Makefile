@@ -24,3 +24,9 @@ clobber:
 
 run: preempt_gust.sh
 	qsub preempt_gust.sh
+
+run_mpi: preempt_gust_mpi.sh
+	qsub preempt_gust_mpi.sh
+
+qdelall:
+	qdel $$(qstat -u $${USER} | grep gusched | cut -d'.' -f1)
