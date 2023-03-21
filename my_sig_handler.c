@@ -31,6 +31,7 @@ void register_sig_handler ()
   signal(SIGINT,  my_sig_handler);
   signal(SIGTERM, my_sig_handler);
   signal(SIGUSR1, my_sig_handler);
+  signal(SIGUSR2, my_sig_handler);
 }
 
 
@@ -76,7 +77,12 @@ void my_sig_handler (int signum)
       break;
 
     case SIGUSR1:
-      printf("...caught SIGUSR1 at %s, ignoring...\n",ctime(&now));
+      printf("...caught SIGUSR1 at %s", ctime(&now));
+      checkpoint_req = 1;
+      break;
+
+    case SIGUSR2:
+      printf("...caught SIGUSR2 at %s, ignoring...\n",ctime(&now));
       return;
 
     default:
