@@ -10,7 +10,7 @@ int checkpoint_req = 0;
 
 
 
-int checkpoint_requested()
+int checkpoint_requested ()
 {
   return checkpoint_req;
 }
@@ -36,14 +36,14 @@ void register_sig_handler ()
 
 
 
-int checkpoint_requested_()
+int checkpoint_requested_ ()
 {
   return checkpoint_requested();
 }
 
 
 
-void done_checkpoint_()
+void done_checkpoint_ ()
 {
   done_checkpoint();
 }
@@ -114,7 +114,7 @@ int mpi_checkpoint_requested (MPI_Comm comm)
 
 
 
-int mpi_checkpoint_requested_(MPI_Comm comm)
+int mpi_checkpoint_requested_ (MPI_Comm comm)
 {
   return mpi_checkpoint_requested(comm);
 }

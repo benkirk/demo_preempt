@@ -1,4 +1,9 @@
-all: cdemo fdemo demo_mpi
+CXX := mpicxx
+CC  := mpicc
+FC  := mpif90
+F77 := mpif77
+
+all: cdemo fdemo demo_mpi minimal_mpi
 
 cdemo : main.o my_sig_handler.o
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
@@ -15,8 +20,14 @@ main_mpi.o: main_mpi.cpp my_sig_handler.h
 demo_mpi: main_mpi.o my_sig_handler_mpi.o
 	$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)
 
+minimal_mpi.o: minimal_mpi.cpp
+	$(CXX) -c -o $@ $< -DHAVE_MPI $(CXXFLAGS) $(LDFLAGS)
+
+minimal_mpi: minimal_mpi.o
+	$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)
+
 clean:
-	rm -f cdemo fdemo demo_mpi *.o *~
+	rm -f cdemo fdemo demo_mpi minimal_mpi *.o *~
 
 clobber:
 	$(MAKE) clean
