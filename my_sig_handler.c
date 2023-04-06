@@ -92,10 +92,8 @@ void my_sig_handler (int signum)
     }
 
   // re-register default signal handler for action
-#ifndef HAVE_MPI
   printf(" --> Restoring default handler for signal %d\n", signum);
   signal(signum, SIG_DFL);
-#endif
 
   return;
 }

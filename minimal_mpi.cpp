@@ -52,6 +52,10 @@ void my_sig_handler (int signum)
       break;
     }
 
+  // re-register default signal handler for action
+  //if (0 == rank) printf(" --> Restoring default handler for signal %d\n", signum);
+  //signal(signum, SIG_DFL);
+
   return;
 }
 
@@ -103,11 +107,11 @@ int main (int argc, char **argv)
   // register our user-defined signal handlers, on every rank
   register_sig_handler();
 
-  for (int i=1; i<=50 ;i++)
+  for (int i=1; i<=5000 ;i++)
     {
       if (0 == rank)
         {
-          printf("%2d : Inside main function\n",i);
+          printf("%2d : Main function loop\n",i);
           fflush(stdout);
           sleep(5);
         }
